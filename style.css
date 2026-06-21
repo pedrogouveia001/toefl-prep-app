@@ -1629,6 +1629,14 @@ h1, h2, h3, h4, .brand-text h2 {
     color: var(--accent-yellow);
 }
 
+/* Speaking Grid Layout */
+.speaking-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
 /* Mobile Header Defaults (Desktop Hidden) */
 .mobile-header {
     display: none;
@@ -1638,167 +1646,7 @@ h1, h2, h3, h4, .brand-text h2 {
 }
 
 /* --- RESPONSIVE STYLE --- */
-@media (max-width: 950px) {
-    /* Layout & Container */
-    .app-container {
-        grid-template-columns: 1fr;
-        height: calc(100vh - 60px);
-        width: 100vw;
-    }
-    
-    .main-content {
-        padding: 1.25rem 1rem;
-        height: calc(100vh - 60px);
-    }
 
-    /* Mobile Header Display */
-    .mobile-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 60px;
-        padding: 0 1.25rem;
-        background-color: var(--bg-dark-800);
-        border-bottom: 1px solid var(--border-glass);
-        position: sticky;
-        top: 0;
-        z-index: 999;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-    
-    .menu-toggle-btn {
-        background: none;
-        border: none;
-        color: var(--text-primary);
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .menu-toggle-btn:hover {
-        background-color: var(--bg-glass);
-        box-shadow: 0 0 10px rgba(114, 137, 218, 0.2);
-    }
-    
-    .mobile-brand {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-family: 'Outfit', sans-serif;
-        font-weight: 700;
-        font-size: 1.25rem;
-        color: var(--text-primary);
-    }
-    
-    .mobile-logo {
-        font-size: 1.5rem;
-    }
-
-    /* Sidebar Slide-in Mobile Menu */
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: -280px;
-        width: 280px;
-        height: 100vh;
-        background-color: var(--bg-dark-800);
-        z-index: 1001;
-        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.6);
-        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        display: flex !important; /* Force override display: none */
-    }
-    
-    .sidebar.active {
-        left: 0;
-    }
-    
-    /* Backdrop overlay style */
-    .sidebar-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(3px);
-        z-index: 1000;
-        display: none;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    
-    .sidebar-overlay.active {
-        display: block;
-        opacity: 1;
-    }
-
-    /* Stack grid containers */
-    .study-plan-layout,
-    .chat-layout, 
-    .writing-layout, 
-    .vocab-layout, 
-    .mock-layout, 
-    .charts-grid,
-    .practice-grid,
-    .simulator-split-layout {
-        grid-template-columns: 1fr !important;
-        gap: 1.25rem;
-    }
-    
-    /* Split viewports stack vertically */
-    .split-viewport {
-        grid-template-columns: 1fr !important;
-        height: auto !important;
-    }
-    
-    .practice-pane, .simulator-pane {
-        height: auto !important;
-        max-height: none !important;
-        overflow-y: visible !important;
-    }
-    
-    /* Heights auto-fit content on mobile */
-    .chat-main, 
-    .feedback-sidebar, 
-    .writing-editor-pane, 
-    .writing-feedback-pane, 
-    .flashcard-container, 
-    .deck-manager, 
-    .mock-passage-pane, 
-    .mock-questions-pane, 
-    .chart-container-box {
-        height: auto !important;
-    }
-
-    /* Study plan widgets adjustments */
-    .evolution-stats-grid {
-        grid-template-columns: 1fr !important;
-    }
-    
-    /* Font sizes scaling on mobile */
-    h1 { font-size: 1.75rem !important; }
-    h2 { font-size: 1.35rem !important; }
-    
-    /* Timeline items */
-    .study-wizard {
-        padding-left: 1.5rem !important;
-    }
-    
-    /* Flashcards container fitting */
-    .flashcard {
-        height: 380px !important;
-        width: 100% !important;
-        max-width: 450px;
-    }
-    .card-front, .card-back {
-        padding: 1.5rem !important;
-    }
-}
 
 /* ==========================================================================
    TOEFL iBT STUDY PLAN & TUTOR DASHBOARD STYLES
@@ -2683,4 +2531,356 @@ h1, h2, h3, h4, .brand-text h2 {
     border-radius: 4px;
 }
 
+@media (max-width: 950px) {
+    /* Global Viewport Heights and Momentum Scrolling */
+    body {
+        height: 100dvh;
+    }
+    
+    .app-container {
+        grid-template-columns: 1fr;
+        height: calc(100dvh - 60px);
+        width: 100vw;
+    }
+    
+    .main-content {
+        padding: 1.25rem 1rem;
+        height: calc(100dvh - 60px);
+        -webkit-overflow-scrolling: touch;
+    }
 
+    /* iOS Mobile Input Focus Zoom Prevention */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+
+    /* Header Stacking to Prevent Overlap */
+    .pane-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+    }
+
+    /* Speaking Grid & Live Feedback Panel Spacing */
+    .speaking-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+
+    .feedback-sidebar-compact {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        margin-top: 1rem !important;
+    }
+
+    .feedback-section-compact {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.4rem !important;
+    }
+
+    .feedback-section-compact h4 {
+        font-size: 0.8rem !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        color: var(--accent-blue) !important;
+    }
+
+    /* Mobile Header Display */
+    .mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        padding: 0 1.25rem;
+        background-color: var(--bg-dark-800);
+        border-bottom: 1px solid var(--border-glass);
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .menu-toggle-btn {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .menu-toggle-btn:hover {
+        background-color: var(--bg-glass);
+        box-shadow: 0 0 10px rgba(114, 137, 218, 0.2);
+    }
+    
+    .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+    }
+    
+    .mobile-logo {
+        font-size: 1.5rem;
+    }
+
+    /* Sidebar Slide-in Mobile Menu */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100dvh;
+        background-color: var(--bg-dark-800);
+        z-index: 1001;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.6);
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex !important; /* Force override display: none */
+    }
+    
+    .sidebar.active {
+        left: 0;
+    }
+    
+    /* Backdrop overlay style */
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100dvh;
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(3px);
+        z-index: 1000;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .sidebar-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Stack grid containers */
+    .study-plan-layout,
+    .chat-layout, 
+    .writing-layout, 
+    .vocab-layout, 
+    .mock-layout, 
+    .charts-grid,
+    .practice-grid,
+    .simulator-split-layout {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem;
+    }
+    
+    /* Curriculum monthly boxes stack on mobile */
+    .curriculum-phases {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    /* Metrics and KPIs grids to 2-column stack on mobile */
+    .kpi-grid,
+    .report-metrics-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.75rem !important;
+    }
+    
+    /* Split viewports stack vertically */
+    .split-viewport,
+    .toefl-viewport-split {
+        grid-template-columns: 1fr !important;
+        height: auto !important;
+    }
+    
+    /* Practice Arena containers height control */
+    .practice-pane, 
+    .simulator-pane,
+    .toefl-passage-container, 
+    .toefl-question-container {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Heights control for Chat and Writing editor to support scrolling inside */
+    .chat-main {
+        height: 480px !important;
+    }
+    
+    .feedback-sidebar {
+        height: 350px !important;
+    }
+    
+    .writing-editor-pane {
+        height: auto !important;
+    }
+    
+    .writing-feedback-pane {
+        height: auto !important;
+    }
+    
+    .flashcard-container, 
+    .deck-manager, 
+    .chart-container-box {
+        height: auto !important;
+    }
+
+    /* Settings form padding scale down */
+    .settings-form {
+        padding: 1.25rem !important;
+        gap: 1.5rem !important;
+    }
+
+    /* KPI card spacing scale down */
+    .kpi-card {
+        padding: 1rem 0.75rem !important;
+    }
+
+    .kpi-value {
+        font-size: 1.5rem !important;
+    }
+
+    /* Study plan widgets adjustments */
+    .evolution-stats-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Font sizes scaling on mobile */
+    h1 { font-size: 1.6rem !important; }
+    h2 { font-size: 1.3rem !important; }
+    
+    /* Timeline items */
+    .study-wizard {
+        padding-left: 0.5rem !important;
+    }
+    
+    /* Flashcards container fitting */
+    .flashcard {
+        height: 360px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .card-front, .card-back {
+        padding: 1.25rem !important;
+    }
+
+    /* TOEFL Simulator specific adjustments */
+    .toefl-overlay {
+        height: 100dvh !important;
+        width: 100% !important;
+    }
+
+    .toefl-viewport {
+        overflow-y: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .toefl-viewport-split {
+        grid-template-columns: 1fr !important;
+        height: auto !important;
+        display: block !important;
+    }
+
+    .toefl-passage-container, 
+    .toefl-question-container {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        border-right: none !important;
+        border-bottom: 1px solid #cbd5e1;
+        padding: 1.25rem !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .toefl-viewport-center {
+        display: block !important;
+        padding: 1rem !important;
+        height: auto !important;
+        min-height: 100% !important;
+        overflow: visible !important;
+    }
+
+    .toefl-speaking-card,
+    .toefl-listening-graphic,
+    .toefl-listening-question-pane {
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: none !important;
+        padding: 1.25rem !important;
+    }
+
+    .toefl-sub-banner {
+        flex-direction: row !important;
+        height: auto !important;
+        padding: 0.5rem 1.25rem !important;
+        gap: 0.5rem !important;
+        flex-wrap: wrap !important;
+    }
+
+    .toefl-passage-title {
+        font-size: 0.85rem !important;
+        flex: 1 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .toefl-timer-box {
+        font-size: 0.85rem !important;
+        flex-shrink: 0 !important;
+    }
+
+    .toefl-section-name {
+        display: none !important; /* Hide section name to save space */
+    }
+    
+    .toefl-speaking-card {
+        padding: 1.25rem !important;
+    }
+    
+    .toefl-speaking-prompt {
+        font-size: 1rem !important;
+    }
+
+    .editor-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+    }
+
+    .editor-header select {
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    /* Hiding elements for clean mobile layout */
+    .toefl-btn-text,
+    .hide-mobile,
+    .hands-free-text {
+        display: none !important;
+    }
+
+    /* Native touch scroll inertia for chats/tables */
+    .chat-log,
+    .table-responsive {
+        -webkit-overflow-scrolling: touch;
+    }
+}

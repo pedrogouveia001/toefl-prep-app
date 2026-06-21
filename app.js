@@ -1417,8 +1417,8 @@ function initSpeechSystems() {
             handsFreeMode = !handsFreeMode;
             handsFreeBtn.classList.toggle('active', handsFreeMode);
             handsFreeBtn.innerHTML = handsFreeMode 
-                ? '🔄 Hands-Free: ON' 
-                : '🔄 Hands-Free: OFF';
+                ? '🔄 <span class="hands-free-text">Hands-Free: ON</span>' 
+                : '🔄 <span class="hands-free-text">Hands-Free: OFF</span>';
             
             if (handsFreeMode && conversationState === 'IDLE') {
                 interimTranscript = '';

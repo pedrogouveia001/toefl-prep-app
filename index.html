@@ -341,7 +341,7 @@
                                         <span class="mic-icon">🎤</span>
                                     </button>
                                     <button class="action-btn hands-free-btn" id="hands-free-toggle" title="Toggle Hands-Free Loop">
-                                        🔄 Hands-Free: OFF
+                                        🔄 <span class="hands-free-text">Hands-Free: OFF</span>
                                     </button>
                                     <input type="text" id="chat-text-input" placeholder="Type your response or speak..." autocomplete="off">
                                     <button class="action-btn send-btn" id="chat-send-btn">Send</button>
@@ -545,9 +545,9 @@
                         </div>
 
                         <div class="card-controls" id="card-controls" style="visibility: hidden;">
-                            <button class="btn-grade btn-easy" data-grade="easy">Easy (Next Week)</button>
-                            <button class="btn-grade btn-good" data-grade="good">Good (Next Day)</button>
-                            <button class="btn-grade btn-hard" data-grade="hard">Hard (Repeat Soon)</button>
+                            <button class="btn-grade btn-easy" data-grade="easy">Easy<span class="hide-mobile"> (Next Week)</span></button>
+                            <button class="btn-grade btn-good" data-grade="good">Good<span class="hide-mobile"> (Next Day)</span></button>
+                            <button class="btn-grade btn-hard" data-grade="hard">Hard<span class="hide-mobile"> (Repeat Soon)</span></button>
                         </div>
                     </div>
 
@@ -737,10 +737,10 @@
                 <span class="toefl-section-name" id="toefl-sim-section-name">Reading Section</span>
             </div>
             <div class="toefl-toolbar-controls">
-                <button class="toefl-btn" id="toefl-btn-volume" title="Volume">Volume 🔊</button>
-                <button class="toefl-btn" id="toefl-btn-help" title="Help">Help ❓</button>
-                <button class="toefl-btn" id="toefl-btn-back" title="Back Question">Back ⬅️</button>
-                <button class="toefl-btn" id="toefl-btn-next" title="Next Question">Next ➡️</button>
+                <button class="toefl-btn" id="toefl-btn-volume" title="Volume"><span class="toefl-btn-text">Volume</span> 🔊</button>
+                <button class="toefl-btn" id="toefl-btn-help" title="Help"><span class="toefl-btn-text">Help</span> ❓</button>
+                <button class="toefl-btn" id="toefl-btn-back" title="Back Question"><span class="toefl-btn-text">Back</span> ⬅️</button>
+                <button class="toefl-btn" id="toefl-btn-next" title="Next Question"><span class="toefl-btn-text">Next</span> ➡️</button>
             </div>
         </header>
 
