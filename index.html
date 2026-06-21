@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerebrum English Tutor — TOEFL Prep Hub</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-logo">🧠</div>
+                <div class="brand-text">
+                    <h2>Cerebrum</h2>
+                    <span>TOEFL Prep Hub</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-tab="studyplan">
+                    <span class="nav-icon">📅</span> Study Plan
+                </button>
+                <button class="nav-btn" data-tab="reading">
+                    <span class="nav-icon">📖</span> Reading Section
+                </button>
+                <button class="nav-btn" data-tab="listening">
+                    <span class="nav-icon">🎧</span> Listening Section
+                </button>
+                <button class="nav-btn" data-tab="speaking">
+                    <span class="nav-icon">🗣️</span> Speaking Section
+                </button>
+                <button class="nav-btn" data-tab="writing">
+                    <span class="nav-icon">✍️</span> Writing Section
+                </button>
+                <button class="nav-btn" data-tab="vocabulary">
+                    <span class="nav-icon">🎴</span> Vocabulary
+                </button>
+                <button class="nav-btn" data-tab="evolution">
+                    <span class="nav-icon">📊</span> Evolution & Stats
+                </button>
+                <button class="nav-btn" data-tab="settings">
+                    <span class="nav-icon">⚙️</span> Settings
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="ielts-badge" id="target-badge">Target: TOEFL 100+</div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- TAB: STUDY PLAN & TUTOR DASHBOARD -->
+            <section id="tab-studyplan" class="tab-pane active">
+                <div class="pane-header">
+                    <div>
+                        <h1>Tutor Dashboard & Study Plan</h1>
+                        <p>Track your 3-month TOEFL iBT preparation cycle. Focus on your daily 50-minute study blocks.</p>
+                    </div>
+                    <div class="header-controls">
+                        <div class="current-cycle-badge" id="current-cycle-badge">
+                            Cycle: Day 1 (Reading)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="study-plan-layout">
+                    <!-- Column 1: Daily Tracker & Active Cycle -->
+                    <div class="study-plan-card active-day-card">
+                        <h2>👨‍🏫 Tutor Active Guidance</h2>
+                        <div class="tutor-chat-bubble" id="tutor-guidance-bubble">
+                            <p>Loading your study plan and active instructions...</p>
+                        </div>
+                        <div class="cycle-navigator">
+                            <h3>Set Current Study Cycle Day:</h3>
+                            <div class="cycle-days-buttons">
+                                <button class="btn btn-cycle" data-cycle="1" id="btn-cycle-1">Day 1: Reading</button>
+                                <button class="btn btn-cycle" data-cycle="2" id="btn-cycle-2">Day 2: Listening</button>
+                                <button class="btn btn-cycle" data-cycle="3" id="btn-cycle-3">Day 3: Speaking</button>
+                                <button class="btn btn-cycle" data-cycle="4" id="btn-cycle-4">Day 4: Writing</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Today's Guided Study Wizard -->
+                    <div class="study-plan-card wizard-card">
+                        <h2>🧙‍♂️ Daily Study Guide Wizard</h2>
+                        <p class="wizard-subtitle font-sm" style="color: var(--text-muted); margin-bottom: 1.5rem;">Complete your TOEFL preparation routine step-by-step:</p>
+                        <div class="study-wizard" id="study-wizard-timeline">
+                            <!-- Populated dynamically via app.js -->
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Today's Action Plan Checklist -->
+                    <div class="study-plan-card checklist-card">
+                        <h2>📋 Today's 50-Minute Blocks</h2>
+                        <div class="checklist-items" id="cycle-checklist-container">
+                            <!-- Populated dynamically based on selected cycle day -->
+                        </div>
+                        <div class="progress-container">
+                            <span class="progress-label">Today's Progress</span>
+                            <div class="progress-bar-outer">
+                                <div class="progress-bar-inner" id="cycle-progress-bar" style="width: 0%;"></div>
+                            </div>
+                            <span class="progress-percentage" id="cycle-progress-percent">0% completed</span>
+                        </div>
+                    </div>
+
+                    <!-- Column 4: The 3-Month Curriculum Overview -->
+                    <div class="study-plan-card curriculum-card full-width-card">
+                        <h2>📅 3-Month Academic Curriculum</h2>
+                        <div class="curriculum-phases">
+                            <div class="phase-box" id="phase-1-box">
+                                <h3>🚀 Month 1: Foundation & Templates</h3>
+                                <p>Master question structures, set up speaking and writing templates, and build academic note-taking stamina.</p>
+                                <ul>
+                                    <li>Practice core question types in Reading & Listening</li>
+                                    <li>Perfect the "Listen and Repeat" rhythm</li>
+                                    <li>Automate Academic Discussion writing structures</li>
+                                </ul>
+                            </div>
+                            <div class="phase-box" id="phase-2-box">
+                                <h3>📈 Month 2: Spontaneous Practice</h3>
+                                <p>Focus on response speed, vocabulary diversity, and elimination of filler words under strict time pressure.</p>
+                                <ul>
+                                    <li>Execute complex integrated tasks</li>
+                                    <li>Practice Interview-style Speaking without prep time</li>
+                                    <li>Study advanced academic reading topics</li>
+                                </ul>
+                            </div>
+                            <div class="phase-box" id="phase-3-box">
+                                <h3>🎯 Month 3: Extreme Simulation</h3>
+                                <p>Simulate full tests under real exam conditions to build stamina and polish final academic vocabulary.</p>
+                                <ul>
+                                    <li>Complete full Reading & Listening mock tests</li>
+                                    <li>Refine delivery pacing and grammatical precision</li>
+                                    <li>Aim for 100+ predicted score</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: READING SECTION -->
+            <section id="tab-reading" class="tab-pane">
+                <div class="pane-header">
+                    <div>
+                        <h1>Reading Section</h1>
+                        <p>Read academic-level texts and complete comprehension tests aligned with ETS standards.</p>
+                    </div>
+                </div>
+
+                <div class="skill-tab-container">
+                    <div class="skill-card practice-mode">
+                        <h2>📖 Daily Training (Prática de Leitura)</h2>
+                        <p>Select a mock passage below to study its text, identify paragraph topics, and outline argument structures.</p>
+                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                            <label for="reading-mock-selector" style="font-weight: 500;">Select Test Passage:</label>
+                            <select id="reading-mock-selector" class="select-premium" style="max-width: 320px;">
+                                <option value="toefl-reading">TOEFL Reading Mock 1 (Science: Coral Reefs)</option>
+                                <option value="toefl-reading-urbanization">TOEFL Reading Mock 2 (History: Urbanization)</option>
+                                <option value="ielts-reading">IELTS Reading Mock 1 (Academic: Metrology)</option>
+                                <option value="ielts-reading-agriculture">IELTS Reading Mock 2 (Academic: AI in Agriculture)</option>
+                                <option value="ielts-reading-or">IELTS Reading Mock 3 (Academic: Operations Research)</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary" id="btn-load-reading-practice" style="margin-top: 1.5rem; width: auto;">📖 Load to Practice Arena</button>
+                    </div>
+
+                    <div class="skill-card simulator-mode active-glow">
+                        <h2>🖥️ Timed Exam Simulator (Simulado Oficial)</h2>
+                        <p>Execute the selected reading test in high-fidelity simulation mode with strict countdown timers and the split-screen test layout.</p>
+                        <button class="btn btn-primary" id="btn-start-reading-sim" style="margin-top: 2rem;">⚡ Launch Reading Simulator</button>
+                    </div>
+                </div>
+
+                <!-- READING PRACTICE ARENA -->
+                <div id="reading-practice-arena" class="practice-arena-container" style="display: none; margin-top: 2rem;">
+                    <div class="pane-header" style="margin-bottom: 1.5rem;">
+                        <div>
+                            <h2 id="reading-practice-title" style="font-size: 1.5rem; margin-bottom: 0.25rem;">Active Reading Practice</h2>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Study the passage text on the left and answer the comprehension questions on the right. Note key details and transitions.</p>
+                        </div>
+                        <div class="arena-timer-box" style="display: flex; align-items: center; gap: 0.75rem;">
+                            <span style="font-weight: 500;">Time Remaining:</span>
+                            <span id="reading-practice-timer" class="badge-due" style="font-size: 1.1rem; padding: 0.4rem 0.8rem; background-color: var(--accent-blue);">20:00</span>
+                        </div>
+                    </div>
+                    <div class="split-viewport">
+                        <div class="passage-pane" id="reading-practice-passage">
+                            <!-- Passage text loaded here -->
+                        </div>
+                        <div class="questions-pane">
+                            <form id="reading-practice-questions-form">
+                                <!-- Questions loaded here -->
+                            </form>
+                            <div class="arena-footer" style="margin-top: 2rem; border-top: 1px solid var(--border-glass); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                                <button class="btn btn-secondary" id="btn-exit-reading-practice" style="width: auto;">Exit Practice</button>
+                                <button class="btn btn-primary" id="btn-submit-reading-practice" style="width: auto;">Submit Practice</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: LISTENING SECTION -->
+            <section id="tab-listening" class="tab-pane">
+                <div class="pane-header">
+                    <div>
+                        <h1>Listening Section</h1>
+                        <p>Listen to lecture clips and dialogues and answer academic comprehension questions.</p>
+                    </div>
+                </div>
+
+                <div class="skill-tab-container">
+                    <div class="skill-card practice-mode">
+                        <h2>🎧 Daily Training (Prática de Escuta)</h2>
+                        <p>Select an audio test from the catalog, play the recording to practice note-taking, and check the transcript details.</p>
+                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                            <label for="listening-mock-selector" style="font-weight: 500;">Select Listening Test:</label>
+                            <select id="listening-mock-selector" class="select-premium" style="max-width: 320px;">
+                                <option value="toefl-listening-tectonics">TOEFL Listening Mock 1 (Science: Plate Tectonics)</option>
+                                <option value="ielts-listening">IELTS Listening Mock 1 (Campus Housing)</option>
+                                <option value="ielts-listening-library">IELTS Listening Mock 2 (Library Registration)</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-secondary" id="btn-load-listening-practice" style="margin-top: 1.5rem; width: auto;">🔊 Load to Practice Arena</button>
+                    </div>
+
+                    <div class="skill-card simulator-mode active-glow">
+                        <h2>🖥️ Timed Exam Simulator (Simulado Oficial)</h2>
+                        <p>Start a full Listening Mock Test. The audio will play once via the hidden player, and the questions will appear sequentially only after the audio completes.</p>
+                        <button class="btn btn-primary" id="btn-start-listening-sim" style="margin-top: 2rem;">⚡ Launch Listening Simulator</button>
+                    </div>
+                </div>
+
+                <!-- LISTENING PRACTICE ARENA -->
+                <div id="listening-practice-arena" class="practice-arena-container" style="display: none; margin-top: 2rem;">
+                    <div class="pane-header" style="margin-bottom: 1.5rem;">
+                        <div>
+                            <h2 id="listening-practice-title" style="font-size: 1.5rem; margin-bottom: 0.25rem;">Active Listening Practice</h2>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Listen to the lecture and answer the comprehension questions. Take notes to help you remember details.</p>
+                        </div>
+                        <div class="arena-timer-box" style="display: flex; align-items: center; gap: 0.75rem;">
+                            <span style="font-weight: 500;">Time Remaining:</span>
+                            <span id="listening-practice-timer" class="badge-due" style="font-size: 1.1rem; padding: 0.4rem 0.8rem; background-color: var(--accent-blue);">20:00</span>
+                        </div>
+                    </div>
+                    <div class="split-viewport">
+                        <div class="audio-note-pane" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div class="listening-graphic" style="background: var(--bg-dark-900); border: 1px solid var(--border-glass); border-radius: 12px; padding: 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 220px;">
+                                <div class="listening-icon" style="font-size: 3rem; margin-bottom: 1rem;">🎧</div>
+                                <h3 id="listening-practice-topic" style="margin-bottom: 0.5rem;">Plate Tectonics Lecture</h3>
+                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Use the audio controls below to play, pause, or stop the recording.</p>
+                                <button class="btn btn-secondary" id="btn-play-listening-practice" style="width: auto;">🔊 Play Lecture / Audio</button>
+                            </div>
+                            <div class="note-taking-box" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <label style="font-weight: 500; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>📝 Note-Taking Pad:</span>
+                                    <span style="font-size: 0.8rem; color: var(--text-muted);">Notes are saved locally</span>
+                                </label>
+                                <textarea id="listening-practice-notes" placeholder="Type your academic notes here (e.g. key terms, arguments, details)..." style="background: var(--bg-dark-900); border: 1px solid var(--border-glass); border-radius: 8px; color: var(--text-light); padding: 1rem; min-height: 180px; resize: vertical; font-family: inherit; font-size: 0.95rem;"></textarea>
+                            </div>
+                        </div>
+                        <div class="questions-pane">
+                            <form id="listening-practice-questions-form">
+                                <!-- Questions loaded here -->
+                            </form>
+                            <div class="arena-footer" style="margin-top: 2rem; border-top: 1px solid var(--border-glass); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                                <button class="btn btn-secondary" id="btn-exit-listening-practice" style="width: auto;">Exit Practice</button>
+                                <button class="btn btn-primary" id="btn-submit-listening-practice" style="width: auto;">Submit Practice</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: SPEAKING SECTION -->
+            <section id="tab-speaking" class="tab-pane">
+                <div class="pane-header">
+                    <div>
+                        <h1>Speaking Section</h1>
+                        <p>Practice speaking english with real-time AI feedback and timed TOEFL task simulations.</p>
+                    </div>
+                </div>
+
+                <div class="skill-tab-container speaking-grid">
+                    <!-- Left: AI Chat Room (Practice Mode) -->
+                    <div class="skill-card practice-mode" style="flex: 2; display: flex; flex-direction: column;">
+                        <h2>🗣️ Daily Training: Conversation AI Partner</h2>
+                        
+                        <div class="scenario-section" style="margin-bottom: 1rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 1rem;">
+                            <h3 style="font-size: 0.95rem; margin-bottom: 0.5rem;">Choose a Conversation Topic</h3>
+                            <div id="scenario-picker" class="scenario-picker">
+                                <!-- Rendered dynamically from app.js -->
+                            </div>
+                        </div>
+
+                        <div class="chat-layout" style="flex-grow: 1; display: flex; flex-direction: column; min-height: 400px;">
+                            <div class="chat-main" style="flex-grow: 1; display: flex; flex-direction: column;">
+                                <div class="conversation-header">
+                                    <div id="conversation-state" class="conversation-state state-idle">
+                                        <span class="state-dot"></span> Tap the mic to start speaking
+                                    </div>
+                                </div>
+                                <div class="chat-log" id="chat-log" style="flex-grow: 1; overflow-y: auto; max-height: 350px;">
+                                    <!-- Populated dynamically -->
+                                </div>
+                                <div id="interim-transcript" class="interim-transcript" style="display: none;"></div>
+                                <div id="quick-replies" class="quick-replies" style="display: none;"></div>
+                                <div class="chat-input-bar" style="margin-top: auto;">
+                                    <button class="action-btn mic-btn" id="mic-btn" title="Speak">
+                                        <span class="mic-icon">🎤</span>
+                                    </button>
+                                    <button class="action-btn hands-free-btn" id="hands-free-toggle" title="Toggle Hands-Free Loop">
+                                        🔄 Hands-Free: OFF
+                                    </button>
+                                    <input type="text" id="chat-text-input" placeholder="Type your response or speak..." autocomplete="off">
+                                    <button class="action-btn send-btn" id="chat-send-btn">Send</button>
+                                </div>
+                                <div class="wave-container" id="recording-wave" style="display: none;">
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <span>Recording speech... Speak clearly.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Speaking Feedback and Simulator Selector -->
+                    <div class="feedback-and-simulators" style="flex: 1; display: flex; flex-direction: column; gap: 1rem;">
+                        <div class="skill-card simulator-mode active-glow">
+                            <h2>🖥️ Speaking Simulator (Simulado)</h2>
+                            <p class="font-sm" style="color: var(--text-muted); margin-bottom: 1rem;">Practice Speaking tasks under strict conditions:</p>
+                            <select id="speaking-mock-selector" class="select-premium" style="width: 100%; margin-bottom: 1rem;">
+                                <option value="toefl-speaking-repeat">TOEFL Speaking Mock 1 (Listen and Repeat)</option>
+                                <option value="toefl-speaking-interview">TOEFL Speaking Mock 2 (Campus Interview)</option>
+                            </select>
+                            <button class="btn btn-primary btn-full" id="btn-start-speaking-sim">⚡ Launch Speaking Simulator</button>
+                        </div>
+
+                        <!-- Linguistic Feedback -->
+                        <div class="skill-card practice-feedback">
+                            <h2>🔍 Live Conversation Feedback</h2>
+                            <div class="feedback-sidebar-compact">
+                                <div class="feedback-section-compact">
+                                    <h4>Transcription</h4>
+                                    <div class="feedback-box" id="feedback-transcription">
+                                        <span class="placeholder">Awaiting speech...</span>
+                                    </div>
+                                </div>
+                                <div class="feedback-section-compact">
+                                    <h4>Pronunciation</h4>
+                                    <div class="feedback-box" id="feedback-pronunciation">
+                                        <span class="placeholder">Awaiting speech...</span>
+                                    </div>
+                                </div>
+                                <div class="feedback-section-compact">
+                                    <h4>Fluency & Pacing</h4>
+                                    <div class="feedback-box" id="feedback-fluency">
+                                        <span class="placeholder">Pacing info...</span>
+                                    </div>
+                                </div>
+                                <div class="feedback-section-compact">
+                                    <h4>Grammar Audit</h4>
+                                    <div class="feedback-box" id="feedback-grammar">
+                                        <span class="placeholder">No issues...</span>
+                                    </div>
+                                </div>
+                                <div class="feedback-section-compact">
+                                    <h4>Vocabulary Diversity</h4>
+                                    <div class="feedback-box" id="feedback-vocab-used">
+                                        <span class="placeholder">Vocab...</span>
+                                    </div>
+                                </div>
+                                <div class="feedback-section-compact">
+                                    <h4>Academic Phrasing</h4>
+                                    <div class="feedback-box" id="feedback-collocations">
+                                        <span class="placeholder">Collocations...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: WRITING SECTION -->
+            <section id="tab-writing" class="tab-pane">
+                <div class="pane-header">
+                    <div>
+                        <h1>Writing Section</h1>
+                        <p>Write your essay or discussion post and receive official IELTS/TOEFL grading report.</p>
+                    </div>
+                    <select id="writing-mode-selector" class="select-premium">
+                        <option value="toefl" selected>TOEFL Independent Mode</option>
+                        <option value="ielts">IELTS Academic Mode</option>
+                    </select>
+                </div>
+
+                <div class="writing-layout">
+                    <div class="writing-editor-pane">
+                        <div class="editor-header">
+                            <select id="writing-task-selector">
+                                <option value="task2" selected>TOEFL Academic Discussion Essay / Task 2</option>
+                                <option value="task1">TOEFL Integrated Writing / Task 1</option>
+                            </select>
+                            
+                            <select id="writing-prompt-selector" class="select-premium" style="max-width: 320px;">
+                                <option value="custom">-- Custom Prompt (Escreva seu próprio tema) --</option>
+                            </select>
+                        </div>
+
+                        <div class="prompt-visual-box" id="writing-prompt-visual-container" style="display: none; margin-bottom: 1rem;">
+                            <label>📊 Prompt Visual Resource:</label>
+                            <div class="visual-content" id="writing-prompt-visual-content" style="background: var(--bg-dark-900); border: 1px solid var(--border-glass); border-radius: 8px; padding: 1rem; display: flex; justify-content: center; align-items: center; min-height: 200px;"></div>
+                        </div>
+
+                        <!-- TOEFL iBT Writing Task 2 Forum -->
+                        <div id="writing-academic-discussion-forum" class="forum-container" style="display: none; margin-bottom: 1.5rem;">
+                            <!-- Dynamically loaded from app.js -->
+                        </div>
+
+                        <div class="prompt-box">
+                            <label>📝 Prompt Description:</label>
+                            <textarea id="writing-prompt-text" placeholder="Enter or edit your writing prompt here..."></textarea>
+                        </div>
+
+                        <div class="editor-container">
+                            <textarea id="writing-text-input" placeholder="Start typing your response here..."></textarea>
+                        </div>
+
+                        <div class="editor-footer">
+                            <div class="word-counter">Words: <span id="word-count">0</span></div>
+                            <button class="btn btn-primary" id="evaluate-essay-btn">Evaluate Essay</button>
+                        </div>
+                    </div>
+
+                    <!-- Evaluation Report Display -->
+                    <div class="writing-feedback-pane" id="writing-feedback-pane">
+                        <div class="feedback-placeholder" id="writing-feedback-placeholder">
+                            <span class="large-icon">✍️</span>
+                            <h3>Awaiting Submission</h3>
+                            <p>Write your essay and click Evaluate to see your scoring metrics.</p>
+                        </div>
+
+                        <div class="feedback-report" id="writing-feedback-report" style="display: none;">
+                            <div class="report-header">
+                                <h2>Evaluation Report</h2>
+                                <div class="estimated-band">Estimated Band: <span id="report-band">--</span></div>
+                            </div>
+
+                            <div class="report-metrics-grid">
+                                <div class="metric-card">
+                                    <div class="metric-title" id="metric-t1-title">Development & Structure</div>
+                                    <div class="metric-score" id="score-ta">--</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-title" id="metric-t2-title">Coherence & Unity</div>
+                                    <div class="metric-score" id="score-cc">--</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-title" id="metric-t3-title">Vocabulary Depth</div>
+                                    <div class="metric-score" id="score-lr">--</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-title" id="metric-t4-title">Grammar Variety</div>
+                                    <div class="metric-score" id="score-gr">--</div>
+                                </div>
+                            </div>
+
+                            <div class="report-section">
+                                <h3>📝 Key Errors & Corrections</h3>
+                                <div class="report-box" id="report-errors"></div>
+                            </div>
+
+                            <div class="report-section">
+                                <h3>✨ Exemplary Model Essay</h3>
+                                <div class="report-box model-essay" id="report-model"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: VOCABULARY (SPACED REPETITION) -->
+            <section id="tab-vocabulary" class="tab-pane">
+                <div class="pane-header">
+                    <div>
+                        <h1>Spaced Repetition Vocabulary</h1>
+                        <p>Learn Academic Word List (AWL) terms and critical Research/PO collocations.</p>
+                    </div>
+                    <div class="deck-stats">
+                        Cards Due: <span class="badge badge-due" id="due-count">0</span> | Total: <span class="badge badge-total" id="total-count">0</span>
+                    </div>
+                </div>
+
+                <div class="vocab-layout">
+                    <!-- Flashcard Deck Area -->
+                    <div class="flashcard-container">
+                        <div class="flashcard" id="flashcard">
+                            <div class="flashcard-face card-front">
+                                <div class="card-category" id="card-front-category">Academic Collocation</div>
+                                <div class="card-prompt" id="card-front-prompt">The research was conducted to __________ a critical gap in the existing literature.</div>
+                                <div class="hint-text">Click card to reveal answer</div>
+                            </div>
+                            <div class="flashcard-face card-back">
+                                <div class="card-category" id="card-back-category">Answer & Definition</div>
+                                <div class="card-answer" id="card-back-answer">address / bridge</div>
+                                <div class="card-explanation" id="card-back-explanation">To direct attention, efforts, or resources towards solving a problem or filling a blank space in a body of research.</div>
+                                <div class="card-example" id="card-back-example">"Before proposing the new MCDM model, we had to address a gap in the sensitivity analysis protocols."</div>
+                                <button class="btn btn-secondary" id="card-speak-btn" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; justify-content: center; width: auto; font-size: 0.85rem; padding: 0.5rem 1rem;">🔊 Listen Pronunciation</button>
+                            </div>
+                        </div>
+
+                        <div class="card-controls" id="card-controls" style="visibility: hidden;">
+                            <button class="btn-grade btn-easy" data-grade="easy">Easy (Next Week)</button>
+                            <button class="btn-grade btn-good" data-grade="good">Good (Next Day)</button>
+                            <button class="btn-grade btn-hard" data-grade="hard">Hard (Repeat Soon)</button>
+                        </div>
+                    </div>
+
+                    <!-- Deck Manager Sidebar -->
+                    <div class="deck-manager">
+                        <h3>🗂️ Vocab Actions</h3>
+                        <div class="deck-actions">
+                            <button class="btn btn-secondary btn-full" id="reset-deck-btn">Reset Study History</button>
+                            <button class="btn btn-secondary btn-full" id="add-custom-card-btn">Add Custom Card</button>
+                        </div>
+
+                        <div class="add-card-form" id="add-card-form" style="display: none;">
+                            <h4>New Flashcard</h4>
+                            <input type="text" id="new-card-category" placeholder="Category (e.g. Verb, Noun Collocation)">
+                            <textarea id="new-card-prompt" placeholder="Prompt (use ______ for blank)"></textarea>
+                            <input type="text" id="new-card-answer" placeholder="Correct Answer">
+                            <textarea id="new-card-explanation" placeholder="Definition/Explanation"></textarea>
+                            <textarea id="new-card-example" placeholder="Example sentence"></textarea>
+                            <div class="form-row">
+                                <button class="btn btn-primary" id="save-card-btn">Save</button>
+                                <button class="btn btn-secondary" id="cancel-card-btn">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: EVOLUTION & STATS -->
+            <section id="tab-evolution" class="tab-pane">
+                <div class="pane-header">
+                    <div>
+                        <h1>Evolution & Statistics</h1>
+                        <p>Track your score evolution and vocabulary mastery over time.</p>
+                    </div>
+                    <button class="btn btn-secondary" id="generate-mock-stats-btn">⚡ Simular Histórico (Demo Data)</button>
+                </div>
+
+                <div class="evolution-layout">
+                    <!-- KPI Cards Row -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-title">Overall Estimated Band</div>
+                            <div class="kpi-value" id="kpi-overall">--</div>
+                            <div class="kpi-sub">Target: TOEFL 100+</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Flashcards Memorized</div>
+                            <div class="kpi-value" id="kpi-vocab-count">0</div>
+                            <div class="kpi-sub" id="kpi-vocab-sub">0% of the entire deck</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Mock Tests Completed</div>
+                            <div class="kpi-value" id="kpi-mocks-count">0</div>
+                            <div class="kpi-sub">Reading & Listening</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Writing Evaluations</div>
+                            <div class="kpi-value" id="kpi-writings-count">0</div>
+                            <div class="kpi-sub">Essays analysed by IA</div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Grid -->
+                    <div class="charts-grid">
+                        <div class="chart-container-box">
+                            <h3>📈 Performance Evolution Over Time</h3>
+                            <canvas id="scoreEvolutionChart"></canvas>
+                        </div>
+                        <div class="chart-container-box">
+                            <h3>📊 Vocabulary Deck Distribution</h3>
+                            <canvas id="vocabDistributionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- History Log Table -->
+                    <div class="chart-container-box full-width-chart" style="margin-top: 1.5rem;">
+                        <h3>📜 History Log & Detailed Performance</h3>
+                        <div class="table-responsive">
+                            <table class="history-table" id="history-log-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Activity Type</th>
+                                        <th>Test Name / Prompt</th>
+                                        <th>Score / Estimated Band</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="history-log-tbody">
+                                    <tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 1.5rem;">No history registered yet. Start practicing!</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: SETTINGS -->
+            <section id="tab-settings" class="tab-pane">
+                <div class="pane-header">
+                    <div>
+                        <h1>System Settings</h1>
+                        <p>Configure API parameters, voices, and customize your tutor persona.</p>
+                    </div>
+                </div>
+
+                <div class="settings-form">
+                    <div class="settings-section">
+                        <h3>🔑 API Authentication</h3>
+                        <div class="form-group">
+                            <label for="settings-api-key">Gemini API Key:</label>
+                            <input type="password" id="settings-api-key" placeholder="Enter your Gemini API key...">
+                            <span class="help-text">Stored securely in your local browser storage (`localStorage`). Never sent to external third parties.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="settings-api-model">Gemini Model:</label>
+                            <select id="settings-api-model">
+                                <option value="gemini-2.5-flash">Gemini 2.5 Flash (Fast & Cost-Efficient - Recommended)</option>
+                                <option value="gemini-2.5-pro">Gemini 2.5 Pro (Analytical & Deep Writing Assessment)</option>
+                                <option value="gemini-3.5-flash">Gemini 3.5 Flash (Advanced & Long-Context Agentic)</option>
+                                <option value="gemini-3.1-flash-lite">Gemini 3.1 Flash-Lite (Ultra-Fast & High Availability - Best when busy)</option>
+                                <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite (Extremely Light & Cost-Efficient)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>🗣️ Tutor Voice & Audio</h3>
+                        <div class="form-group">
+                            <label for="settings-tts-voice">Tutor Speech Voice (TTS):</label>
+                            <select id="settings-tts-voice">
+                                <option value="">-- Load System Voices --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="settings-tts-rate">Speech Velocity:</label>
+                            <input type="range" id="settings-tts-rate" min="0.6" max="1.5" step="0.1" value="1.0">
+                            <div class="range-labels">
+                                <span>Slow (0.6x)</span>
+                                <span>Normal (1.0x)</span>
+                                <span>Fast (1.5x)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="settings-silence-timeout">Listening Pause (Silence Timeout):</label>
+                            <input type="range" id="settings-silence-timeout" min="1000" max="5000" step="500" value="2500">
+                            <div class="range-labels">
+                                <span>Aggressive (1.0s)</span>
+                                <span>Balanced (2.5s)</span>
+                                <span>Relaxed (5.0s)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>🎓 Tutor Profile</h3>
+                        <div class="form-group">
+                            <label for="settings-tutor-persona">Examiner Persona:</label>
+                            <select id="settings-tutor-persona">
+                                <option value="friendly">Friendly Academic (Encouraging, details small mistakes)</option>
+                                <option value="strict">Strict TOEFL Evaluator (Rigorous scoring, critical feedback)</option>
+                                <option value="conversational">Colloquial Conversationalist (Natural chat, idiom-heavy)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" id="save-settings-btn">Save Configurations</button>
+
+                    <div class="settings-section" style="border-top: 1px solid var(--border-glass); padding-top: 1.5rem; margin-top: 2rem;">
+                        <h3 style="color: #ef4444;">⚠️ Danger Zone</h3>
+                        <div class="form-group">
+                            <span class="help-text" style="color: var(--text-muted); display: block; margin-bottom: 0.75rem;">This will permanently delete your performance stats history, mock tests records, writing evaluations, chat logs, and restore the vocabulary deck.</span>
+                            <button class="btn btn-secondary" id="reset-all-data-btn" style="background-color: #dc2626; color: white; border: none; font-weight: 600;">Reset All Data & Clear History</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- TOEFL iBT TEST-DAY SIMULATOR OVERLAY -->
+    <div id="toefl-simulator-overlay" class="toefl-overlay" style="display: none;">
+        <!-- Top Toolbar -->
+        <header class="toefl-header">
+            <div class="toefl-title-area">
+                <span class="toefl-logo-text">TOEFL iBT®</span>
+                <span class="toefl-section-name" id="toefl-sim-section-name">Reading Section</span>
+            </div>
+            <div class="toefl-toolbar-controls">
+                <button class="toefl-btn" id="toefl-btn-volume" title="Volume">Volume 🔊</button>
+                <button class="toefl-btn" id="toefl-btn-help" title="Help">Help ❓</button>
+                <button class="toefl-btn" id="toefl-btn-back" title="Back Question">Back ⬅️</button>
+                <button class="toefl-btn" id="toefl-btn-next" title="Next Question">Next ➡️</button>
+            </div>
+        </header>
+
+        <!-- Divider Line with Section Name and Timer -->
+        <div class="toefl-sub-banner">
+            <span class="toefl-passage-title" id="toefl-sim-title">Passage Name</span>
+            <div class="toefl-timer-box">
+                <span class="toefl-timer-label">Time Remaining:</span>
+                <span class="toefl-timer-value" id="toefl-sim-timer">00:35:00</span>
+            </div>
+        </div>
+
+        <!-- Simulator Content Window -->
+        <div class="toefl-viewport">
+            <!-- 1. Reading Split-Screen View -->
+            <div id="toefl-sim-reading-view" class="toefl-viewport-split" style="display: none;">
+                <div class="toefl-passage-container" id="toefl-sim-passage">
+                    <!-- Passage text populated dynamically -->
+                </div>
+                <div class="toefl-question-container">
+                    <div class="toefl-question-number" id="toefl-sim-q-num">Question 1 of 10</div>
+                    <div class="toefl-question-text" id="toefl-sim-q-text">Loading question...</div>
+                    <div class="toefl-options-list" id="toefl-sim-q-options">
+                        <!-- Radio buttons populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Listening View -->
+            <div id="toefl-sim-listening-view" class="toefl-viewport-center" style="display: none;">
+                <div class="toefl-listening-graphic" id="toefl-sim-listening-graphic-container">
+                    <div class="listening-icon">🎧</div>
+                    <h3 id="toefl-sim-listening-topic">Professor lecturing Geology Class</h3>
+                    <p>Listen to the lecture and answer the questions that follow.</p>
+                    <div class="toefl-listening-progress-bar">
+                        <div class="toefl-listening-progress-inner" id="toefl-sim-audio-progress" style="width: 0%;"></div>
+                    </div>
+                    <button class="btn btn-primary" id="toefl-sim-play-audio-btn" style="margin-top: 1.5rem;">🔊 Play Lecture / Conversation</button>
+                </div>
+                <div class="toefl-listening-question-pane" id="toefl-sim-listening-q-pane" style="display: none;">
+                    <div class="toefl-question-number" id="toefl-sim-l-q-num">Question 1 of 9</div>
+                    <div class="toefl-question-text" id="toefl-sim-l-q-text">Loading question...</div>
+                    <div class="toefl-options-list" id="toefl-sim-l-q-options">
+                        <!-- Options populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Speaking View (Listen and Repeat & Take an Interview) -->
+            <div id="toefl-sim-speaking-view" class="toefl-viewport-center" style="display: none;">
+                <div class="toefl-speaking-card">
+                    <div class="toefl-speaking-mode-badge" id="toefl-sim-s-task-type">Speaking Task</div>
+                    <div class="toefl-speaking-prompt" id="toefl-sim-s-prompt">Prompt text will appear here...</div>
+                    
+                    <div class="toefl-speaking-indicator-container">
+                        <div class="toefl-speaking-circle" id="toefl-sim-s-circle">🎙️</div>
+                        <div class="toefl-speaking-timer-text" id="toefl-sim-s-timer-desc">Preparing...</div>
+                        <div class="toefl-speaking-wave" id="toefl-sim-s-wave" style="display: none;">
+                            <div class="s-wave-bar"></div>
+                            <div class="s-wave-bar"></div>
+                            <div class="s-wave-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Live transcription preview -->
+                    <div class="toefl-speaking-transcription" id="toefl-sim-s-transcription">Waiting for voice input...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Toolbar Controls -->
+        <footer class="toefl-footer">
+            <button class="toefl-footer-btn" id="toefl-sim-exit-btn">Exit Test Mode</button>
+            <button class="toefl-footer-btn toefl-footer-btn-primary" id="toefl-sim-submit-btn" style="display: none;">Submit Section</button>
+        </footer>
+    </div>
+
+    <!-- Hidden offscreen YouTube player container for Listening tasks -->
+    <div id="toefl-audio-placeholder" style="position: absolute; top: -9999px; left: -9999px; width: 0; height: 0; opacity: 0; overflow: hidden;"></div>
+
+    <script src="flashcards_db.js?v=1.1.4"></script>
+    <script src="app.js?v=1.1.4"></script>
+</body>
+</html>
