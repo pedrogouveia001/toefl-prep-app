@@ -1629,19 +1629,174 @@ h1, h2, h3, h4, .brand-text h2 {
     color: var(--accent-yellow);
 }
 
+/* Mobile Header Defaults (Desktop Hidden) */
+.mobile-header {
+    display: none;
+}
+.sidebar-overlay {
+    display: none;
+}
+
 /* --- RESPONSIVE STYLE --- */
 @media (max-width: 950px) {
+    /* Layout & Container */
     .app-container {
         grid-template-columns: 1fr;
+        height: calc(100vh - 60px);
+        width: 100vw;
     }
+    
+    .main-content {
+        padding: 1.25rem 1rem;
+        height: calc(100vh - 60px);
+    }
+
+    /* Mobile Header Display */
+    .mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        padding: 0 1.25rem;
+        background-color: var(--bg-dark-800);
+        border-bottom: 1px solid var(--border-glass);
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .menu-toggle-btn {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .menu-toggle-btn:hover {
+        background-color: var(--bg-glass);
+        box-shadow: 0 0 10px rgba(114, 137, 218, 0.2);
+    }
+    
+    .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+    }
+    
+    .mobile-logo {
+        font-size: 1.5rem;
+    }
+
+    /* Sidebar Slide-in Mobile Menu */
     .sidebar {
-        display: none; /* In production, you would add a hamburger menu */
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100vh;
+        background-color: var(--bg-dark-800);
+        z-index: 1001;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.6);
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex !important; /* Force override display: none */
     }
-    .chat-layout, .writing-layout, .vocab-layout, .mock-layout, .charts-grid {
-        grid-template-columns: 1fr;
+    
+    .sidebar.active {
+        left: 0;
     }
-    .chat-main, .feedback-sidebar, .writing-editor-pane, .writing-feedback-pane, .flashcard-container, .deck-manager, .mock-passage-pane, .mock-questions-pane, .chart-container-box {
-        height: auto;
+    
+    /* Backdrop overlay style */
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(3px);
+        z-index: 1000;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .sidebar-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Stack grid containers */
+    .study-plan-layout,
+    .chat-layout, 
+    .writing-layout, 
+    .vocab-layout, 
+    .mock-layout, 
+    .charts-grid,
+    .practice-grid,
+    .simulator-split-layout {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem;
+    }
+    
+    /* Split viewports stack vertically */
+    .split-viewport {
+        grid-template-columns: 1fr !important;
+        height: auto !important;
+    }
+    
+    .practice-pane, .simulator-pane {
+        height: auto !important;
+        max-height: none !important;
+        overflow-y: visible !important;
+    }
+    
+    /* Heights auto-fit content on mobile */
+    .chat-main, 
+    .feedback-sidebar, 
+    .writing-editor-pane, 
+    .writing-feedback-pane, 
+    .flashcard-container, 
+    .deck-manager, 
+    .mock-passage-pane, 
+    .mock-questions-pane, 
+    .chart-container-box {
+        height: auto !important;
+    }
+
+    /* Study plan widgets adjustments */
+    .evolution-stats-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Font sizes scaling on mobile */
+    h1 { font-size: 1.75rem !important; }
+    h2 { font-size: 1.35rem !important; }
+    
+    /* Timeline items */
+    .study-wizard {
+        padding-left: 1.5rem !important;
+    }
+    
+    /* Flashcards container fitting */
+    .flashcard {
+        height: 380px !important;
+        width: 100% !important;
+        max-width: 450px;
+    }
+    .card-front, .card-back {
+        padding: 1.5rem !important;
     }
 }
 

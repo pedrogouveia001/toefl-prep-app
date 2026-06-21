@@ -981,9 +981,38 @@ function initTabSystem() {
             } else if (tabName === 'studyplan') {
                 updateStudyPlanUI();
             }
+
+            // Auto-close mobile sidebar when navigation occurs
+            const sidebar = document.getElementById('app-sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            if (sidebar && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+            if (overlay && overlay.classList.contains('active')) {
+                overlay.classList.remove('active');
+            }
         });
     });
 }
+
+function initMobileMenu() {
+    const toggleBtn = document.getElementById('menu-toggle-btn');
+    const sidebar = document.getElementById('app-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+
+    if (toggleBtn && sidebar && overlay) {
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    }
+}
+
 
 // ==========================================================================
 // EVOLUTION & CHARTS MANAGEMENT (CHART.JS)
@@ -2902,6 +2931,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSettingsSystem();
     initStudyPlanSystem();
     initTOEFLSimulatorSystem();
+    initMobileMenu();
     updateUIStates();
 });
 
